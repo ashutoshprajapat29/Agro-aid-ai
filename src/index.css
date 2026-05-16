@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --color-bento-bg: #fdfdfc; /* Very warm, light off-white */
+  --color-bento-card: #ffffff;
+  --color-bento-primary: #3d5a3e; /* Deep olive green */
+  --color-bento-accent: #8b997c; /* Muted sage */
+  --color-bento-text-main: #1f2220; /* Soft black */
+  --color-bento-text-muted: #647067; /* Muted gray-green */
+  --color-bento-border: #e8ede8; /* Soft border */
+  --color-bento-highlight: #f2f7f2; /* Light subtle green */
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-bento-bg text-bento-text-main antialiased selection:bg-bento-accent selection:text-white;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight text-bento-text-main;
+  }
+}
+
+.bento-card {
+  @apply bg-bento-card border border-bento-border rounded-3xl p-6 shadow-[0_2px_12px_rgba(0,0,0,0.02)] flex flex-col transition-all;
+}
+
+.bento-title {
+  @apply text-lg font-serif font-semibold text-bento-primary mb-4 flex items-center gap-2;
+}
+
+.markdown-body h1 { @apply text-3xl font-serif font-bold mb-4 mt-6; }
+.markdown-body h2 { @apply text-2xl font-serif font-bold mb-3 mt-5; }
+.markdown-body h3 { @apply text-xl font-serif font-bold mb-2 mt-4; }
+.markdown-body p { @apply mb-4 leading-relaxed; }
+.markdown-body ul { @apply list-none pl-0 mb-4 space-y-2; }
+.markdown-body ul li { @apply relative pl-5; }
+.markdown-body ul li::before { content: '•'; @apply absolute left-0 text-bento-accent text-lg; }
+.markdown-body ol { @apply list-decimal pl-5 mb-4 space-y-2; }
+.markdown-body li { @apply mb-1; }
+.markdown-body strong { @apply font-semibold; }
+.markdown-body em { @apply italic font-serif; }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Big, obvious interaction blocks */
+.action-card {
+  @apply flex flex-col items-center justify-center p-6 rounded-3xl border-2 border-transparent text-center transition-all cursor-pointer hover:-translate-y-1 shadow-sm;
+}
+.action-card.primary { @apply bg-bento-highlight/50 border-bento-primary/10 text-bento-primary hover:border-bento-primary/30 hover:bg-bento-highlight; }
+.action-card.success { @apply bg-green-50/50 border-green-200 text-green-800 hover:bg-green-50 hover:border-green-300; }
+.action-card.danger { @apply bg-rose-50/50 border-rose-200 text-rose-800 hover:bg-rose-50 hover:border-rose-300; }
+.action-card.warning { @apply bg-amber-50/50 border-amber-200 text-amber-800 hover:bg-amber-50 hover:border-amber-300; }
+
+.action-card-icon {
+  @apply w-14 h-14 rounded-full flex items-center justify-center mb-4 transition-transform group-hover:scale-110;
+}
+.action-card.primary .action-card-icon { @apply bg-bento-primary text-white; }
+.action-card.success .action-card-icon { @apply bg-green-600 text-white; }
+.action-card.danger .action-card-icon { @apply bg-rose-600 text-white; }
+.action-card.warning .action-card-icon { @apply bg-amber-600 text-white; }
+
